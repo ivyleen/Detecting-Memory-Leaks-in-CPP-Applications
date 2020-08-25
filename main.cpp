@@ -74,6 +74,22 @@ int main()
 
 	delete [] ptr;
 	
+        // we will try to make new fail with standard behaivior :       
+        // it will throw a exception
+        int* a_ptr[5]{};
+        try
+        {
+                for (int i = 0; i < 5; ++i)
+                {
+                        std::cout << "Allocating memory #" << i << std::endl;
+                        a_ptr[i] = new int[INT_MAX];
+                        std::cout << "Success!" << std::endl;
+                }
+        }
+        catch (std::exception& ex)
+        {
+                std::cout << "Exception: " << ex.what() << std::endl;
+        }
 
 	std::cout << "Done" << std::endl;
 }
