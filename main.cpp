@@ -2,13 +2,22 @@
 #include <malloc.h>
 #include <exception>
 #include <climits>
-
+#include <thread>
 
 int g_value; // global value ----> stored in data segment
 	     // of the virtual address space
 
-void NewHadler()
+int* a_ptr[5]{};
+
+// handler if operator new functions fail
+void NewHandler()
 {
+	std::cout << "Failed to allocate memory" << std::endl;
+
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(1s);
+	delete [] a_ptr[0];
+	a_ptr[0] = nullptr;
 }
 
 int main()
@@ -74,10 +83,13 @@ int main()
 
 	delete [] ptr;
 	
+        
+	// second way to handle a new fail : handlerer
+	std::set_new_handler(NewHandler);
+	
         // we will try to make new fail with standard behaivior :       
         // it will throw a exception
-        int* a_ptr[5]{};
-        try
+	try
         {
                 for (int i = 0; i < 5; ++i)
                 {
@@ -90,6 +102,8 @@ int main()
         {
                 std::cout << "Exception: " << ex.what() << std::endl;
         }
+
+
 
 	std::cout << "Done" << std::endl;
 }
