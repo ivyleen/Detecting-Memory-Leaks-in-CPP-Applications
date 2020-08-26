@@ -85,7 +85,7 @@ int main()
 	
         
 	// second way to handle a new fail : handlerer
-	std::set_new_handler(NewHandler);
+	//std::set_new_handler(NewHandler);
 	
         // we will try to make new fail with standard behaivior :       
         // it will throw a exception
@@ -94,7 +94,7 @@ int main()
                 for (int i = 0; i < 5; ++i)
                 {
                         std::cout << "Allocating memory #" << i << std::endl;
-                        a_ptr[i] = new int[INT_MAX];
+                        a_ptr[i] = new int[INT_MAX/2];
                         std::cout << "Success!" << std::endl;
                 }
         }
@@ -104,6 +104,16 @@ int main()
         }
 
 
+	// nothrow new expression
+	int* nothrow_p = new (std::nothrow) int[INT_MAX];
+	// using std::nothrow the new expression will return nullptr if 
+	// the allocation fails
+	if (nothrow_p == nullptr)
+	{
+		std::cout << "Nothrow new: failed to allocate memory." << std::endl;
+		return -1;
+	}
 
+	delete nothrow_p;
 	std::cout << "Done" << std::endl;
 }
