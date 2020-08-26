@@ -6,7 +6,7 @@ int main()
 
 	// Dynamic allocation
 	// NOTE: dynamic memory can be accessed throughout the program
-	// as lon as you have the address. But the lifetime of the memory
+	// as long as you have the address. But the lifetime of the memory
 	// needs to be managed manually.
 	// Reasons for using dynamic memory: not knowing what size you will
 	// need at compile time or you need more control over the lifetime
