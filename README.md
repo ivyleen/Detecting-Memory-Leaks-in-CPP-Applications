@@ -1,5 +1,5 @@
 # Detecting-Memory-Leaks-in-C-C-Applications
-This repository will follow the Udemy course for detecting memory leaks in C/C++ applications made from Umar Lone.
+This repository will follow the Udemy course for detecting memory leaks in C/C++ applications created by Umar Lone.
 
 
 # How to compile
